@@ -3,6 +3,34 @@
 
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
-<mapper namespace="mapper">
-	
+<mapper namespace="com.green.car.sales.mapper.SalesMapper">
+    <resultMap id="sales" type="com.green.car.sales.dto.SalesDTO">
+        <id     property="saleNo"      column="sale_no"/>
+        <result property="buyerName"   column="buyer_name"/>
+        <result property="buyerPhone"  column="buyer_phone"/>
+        <result property="color"       column="color"/>
+        <result property="saleDate"    column="sale_date"/>
+        <result property="modelNo"     column="model_no"/>
+        <result property="modelName"   column="model_name"/>
+        <result property="price"       column="price"/>
+    </resultMap>
+
+    <insert id="insertSales" parameterType="com.green.car.sales.dto.SalesDTO">
+        INSERT INTO SALES_INFO (BUYER_NAME, buyer_phone, COLOR, SALE_DATE, MODEL_NO)
+        VALUES (#{buyerName}, #{buyerPhone}, #{color}, NOW(), #{modelNo})
+    </insert>
+
+    <select id="selectAllSales" resultMap="sales">
+        SELECT
+        S.SALE_NO,
+        S.BUYER_NAME,
+        S.BUYER_PHONE,
+        S.COLOR,
+        S.SALE_DATE,
+        C.MODEL_NAME,
+        C.PRICE
+        FROM SALES_INFO S
+        JOIN CAR_INFO C ON S.MODEL_NO = C.MODEL_NO
+        ORDER BY S.SALE_DATE DESC
+    </select>
 </mapper>

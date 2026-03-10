@@ -1,0 +1,24 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.thead {
+  background-color: #222;
+  color: white;
+}
+
+.even {
+  background-color: #ddd;
+}
+
+.odd {
+  background-color: white;
+}
