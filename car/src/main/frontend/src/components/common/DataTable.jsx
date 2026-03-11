@@ -1,6 +1,6 @@
 import styles from './DataTable.module.css'
 
-const DataTable = ({ headers, data, renderRow }) => {
+const DataTable = ({ headers, data = [], renderRow }) => {
   return (
     <table className={styles.table}>
       <thead className={styles.thead}>

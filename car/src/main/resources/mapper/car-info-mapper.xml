@@ -16,7 +16,7 @@
         VALUES (#{modelName}, #{price}, #{manufacturer})
     </insert>
 
-    <select id="selectAllCars" resultMap="car">
+    <select id="selectAllCars" resultMap="carInfo">
         SELECT MODEL_NO, MODEL_NAME, PRICE, MANUFACTURER
         FROM CAR_INFO
         ORDER BY MODEL_NO DESC

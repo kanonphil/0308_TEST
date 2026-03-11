@@ -1,0 +1,28 @@
+.nav {
+  display: flex;
+  background-color: #1e293b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.navItem {
+  flex: 1;
+  padding: 16px;
+  color: #cbd5e1;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.navItem:hover {
+  background-color: #334155;
+  color: white;
+}
+
+.content {
+  padding: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}

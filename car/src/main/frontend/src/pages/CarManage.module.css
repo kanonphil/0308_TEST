@@ -1,0 +1,59 @@
+.formArea {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  padding: 24px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  margin-bottom: 36px;
+}
+
+.formArea label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.formArea select,
+.formArea input {
+  padding: 9px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  min-width: 140px;
+  background: white;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.formArea select:focus,
+.formArea input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.formArea button {
+  padding: 9px 28px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  height: 38px;
+}
+
+.formArea button:hover {
+  background-color: #1d4ed8;
+}
+
+.formArea button:active {
+  transform: scale(0.97);
+}
