@@ -1,6 +1,7 @@
-import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
-import { MaterialIcons } from '@expo/vector-icons'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { useState } from 'react'
+import ToDoInput from './ToDoInput'
+import ToDoItem from './ToDoItem'
 
 const ToDoList = () => {
   const [inputText, setInputText] = useState('')
@@ -18,16 +19,12 @@ const ToDoList = () => {
 
   const handleAdd = () => {
     if (inputText.trim() === '') return
-
-    const newItem = {
-      id: Date.now(),
-      text: inputText
-    }
-
     setToDoList([
-      ...toDoList,
-      newItem
-    ])
+      ...toDoList, 
+      { 
+        id: Date.now(), 
+        text: inputText 
+      }])
     setInputText('')
   }
 
@@ -42,67 +39,70 @@ const ToDoList = () => {
 
   const handleEditDone = () => {
     setToDoList(toDoList.map((item) => 
-      item.id === editId ? {...item, text: editText} : item
+      item.id === editId 
+      ? {
+          ...item, 
+          text: editText
+        } 
+      : item
     ))
     setEditId(null)
   }
-  
+
+  const handleEditCancel = () => {
+    setEditId(null)
+    setEditText('')
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>To Do List</Text>
 
       <View>
-        <TextInput 
-          style={styles.input}
-          value={inputText}
+        <ToDoInput 
+          inputText={inputText}
           onChangeText={handleChange}
-          onSubmitEditing={handleAdd}
-          submitBehavior='submit'
-          returnKeyType='done'
-          placeholder='+ Add a Task'
+          onAdd={handleAdd}
         />
 
-        <FlatList 
-          data={toDoList}
-          keyExtractor={(item) => String(item.id)}
-          style={styles.listContainer}
-          renderItem={({item, index}) => (
-            <View 
-              style={[
-                styles.itemContainer, 
-                index === toDoList.length - 1 && { borderBottomWidth: 0 }]}>
-              <View style={styles.item}>
-                {editId === item.id ? (
-                  <TextInput 
-                    value={editText}
-                    onChangeText={(text) => {
-                      if (text.includes('\n')) {
-                        handleEditDone()
-                        return
-                      }
-                      setEditText(text)
-                    }}
-                    onSubmitEditing={handleEditDone}
-                    submitBehavior='submit'
-                    autoFocus
-                    style={styles.editInput}
-                  />
-                ) : (
-                  <Text style={styles.text}>{item.text}</Text>
-                )}
-              </View>
-              
-              <TouchableOpacity onPress={() => handleEditStart(item)}>
-                <MaterialIcons name='edit' size={20} />
-              </TouchableOpacity>
-             
-              <TouchableOpacity onPress={() => handleDelete(item.id)}>
-                <MaterialIcons name='delete-outline' size={20} />
-              </TouchableOpacity>
-             
-            </View>
-          )}
-        />
+        {toDoList.length === 0 ? (
+          <View>
+            <Text 
+              style={{ 
+                textAlign: 'center', 
+                color: '#555', 
+                marginVertical: 12,
+              }}
+            >
+              리스트를 추가해주세요
+            </Text>
+          </View>
+        ) : (
+          <FlatList 
+            data={toDoList}
+            keyExtractor={(item) => String(item.id)}
+            scrollEnabled={false}
+            keyboardShouldPersistTaps='handled'
+            renderItem={({item}) => (
+              <ToDoItem 
+                item={item}
+                isEditing={editId === item.id}
+                editText={editText}
+                onEditTextChange={setEditText}
+                onEditStart={handleEditStart}
+                onEditDone={handleEditDone}
+                onEditCancel={handleEditCancel}
+                onDelete={handleDelete}
+              />
+            )}
+            contentContainerStyle={{
+              gap: 10,
+              backgroundColor: '#dddddd',
+              padding: 10,
+              borderRadius: 4,
+            }}
+          />
+        )}
       </View>
     </View>
   )
@@ -120,40 +120,5 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '700',
     marginVertical: 12,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#aaa',
-    borderRadius: 4,
-    paddingHorizontal: 10,
-    height: 42, 
-    marginBottom: 12,
-  },
-  listContainer: {
-    borderWidth: 3,
-    borderColor: '#aaa',
-    borderRadius: 4,
-  },
-  itemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 12,
-    height: 50, 
-    borderBottomWidth: 3,
-    borderBottomColor: '#aaa',
-    gap: 10
-  },
-  item: {
-    flex: 1,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  },
-  text: {
-    fontSize: 15,
-  },
-  editInput: {
-    fontSize: 15,
-    flex: 1,
-    textAlignVertical: 'center',
   },
 })
