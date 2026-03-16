@@ -4,6 +4,7 @@ import com.green.car.car.dto.CarDTO;
 import com.green.car.car.service.CarService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class CarController {
       return ResponseEntity.ok(list);
     } catch (Exception e) {
       log.error("차량 목록 조회 실패:", e);
-      return ResponseEntity.status(500).body("차량 목록 조회 실패");
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("차량 목록 조회 실패");
     }
   }
 
@@ -34,7 +35,7 @@ public class CarController {
       return ResponseEntity.ok("success");
     } catch (Exception e) {
       log.error("차량 등록 실패:", e);
-      return ResponseEntity.status(500).body("차량 등록 실패");
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("차량 등록 실패");
     }
   }
 }
