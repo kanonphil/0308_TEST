@@ -17,7 +17,7 @@ const DataTable = ({ headers, data = [], renderRow }) => {
       <tbody>
         {data.map((item, index) => (
           <tr key={index} className={index % 2 === 0 ? styles.even : styles.odd}>
-            {renderRow(item, index)}
+            {renderRow(item, index, data.length)}
           </tr>
         ))}
       </tbody>

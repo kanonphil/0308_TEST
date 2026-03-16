@@ -40,9 +40,9 @@ const SalesList = () => {
       <DataTable 
         headers={SALES_HEADERS}
         data={salesList}
-        renderRow={(sale, index) => (
+        renderRow={(sale, index, total) => (
           <>
-            <td>{salesList.length - index}</td>
+            <td>{total - index}</td>
             <td>{sale.buyerName}</td>
             <td>{sale.buyerPhone ? sale.buyerPhone : '-'}</td>
             <td>{sale.saleDate}</td>
