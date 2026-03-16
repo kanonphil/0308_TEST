@@ -19,12 +19,18 @@ const ToDoList = () => {
 
   const handleAdd = () => {
     if (inputText.trim() === '') return
+
+    const idList = toDoList.map(item => item.id)
+
+    const newData = {
+      id: toDoList.length > 0 ? Math.max(...idList) + 1 : 1,
+      text: inputText
+    }
+    
     setToDoList([
       ...toDoList, 
-      { 
-        id: Date.now(), 
-        text: inputText 
-      }])
+      newData
+    ])
     setInputText('')
   }
 

@@ -11,7 +11,8 @@
         <result property="manufacturer" column="manufacturer"/>
     </resultMap>
 
-	<insert id="insertCar" parameterType="com.green.car.car.dto.CarDTO">
+	<insert id="insertCar" parameterType="com.green.car.car.dto.CarDTO"
+            useGeneratedKeys="true" keyProperty="modelNo">
         INSERT INTO CAR_INFO (MODEL_NAME, PRICE, MANUFACTURER)
         VALUES (#{modelName}, #{price}, #{manufacturer})
     </insert>

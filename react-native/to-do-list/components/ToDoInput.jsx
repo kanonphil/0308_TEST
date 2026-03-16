@@ -11,7 +11,7 @@ const ToDoInput = ({
       value={inputText}
       onChangeText={onChangeText}
       onSubmitEditing={onAdd}
-      submitBehavior='submit'
+      submitBehavior='blurAndSubmit'
       returnKeyType='done'
       placeholder='+ Add a Task'
     />

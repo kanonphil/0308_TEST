@@ -1,15 +1,22 @@
-import { StyleSheet } from 'react-native'
+import { Keyboard, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ToDoList from '../components/ToDoList'
 
 const HomeScreen = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ToDoList />
-    </SafeAreaView>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <SafeAreaView style={styles.container}>
+        <ToDoList />
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   )
 }
 
 export default HomeScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  }
+})

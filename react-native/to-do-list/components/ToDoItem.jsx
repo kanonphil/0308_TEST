@@ -13,30 +13,25 @@ const ToDoItem = ({
 }) => {
   return (
     <View style={styles.itemContainer}>
-      <View style={styles.item}>
-        {isEditing ? (
-          <TextInput 
-            value={editText}
-            onChangeText={(text) => {
-              if (text.includes('\n')) {
-                onEditDone()
-                return
-              }
-              onEditTextChange(text)
-            }}
-            onSubmitEditing={onEditDone}
-            submitBehavior='submit'
-            autoFocus
-            style={styles.editInput}
-            onBlur={onEditCancel}
-          />
-        ) : (
-          <Text style={styles.text}>{item.text}</Text>
-        )}
-      </View>
-
-      {!isEditing && (
+      {isEditing ? (
+        <TextInput 
+          value={editText}
+          onChangeText={(text) => {
+            if (text.includes('\n')) {
+              onEditDone()
+              return
+            }
+            onEditTextChange(text)
+          }}
+          onSubmitEditing={onEditDone}
+          submitBehavior='submit'
+          autoFocus
+          style={styles.editInput}
+          onBlur={onEditCancel}
+        />
+      ) : (
         <>
+          <Text style={styles.text}>{item.text}</Text>
           <Pressable 
             onPress={() => onEditStart(item)}
             style={({pressed}) => pressed && styles.pressed}
@@ -69,11 +64,8 @@ const styles = StyleSheet.create({
     gap: 10,
     flexShrink: 0
   },
-  item: {
-    flex: 1,
-    justifyContent: 'center'
-  },
   text: {
+    flex: 1,
     fontSize: 15,
   },
   editInput: {

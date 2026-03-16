@@ -15,7 +15,8 @@
         <result property="price"       column="price"/>
     </resultMap>
 
-    <insert id="insertSales" parameterType="com.green.car.sales.dto.SalesDTO">
+    <insert id="insertSales" parameterType="com.green.car.sales.dto.SalesDTO"
+            useGeneratedKeys="true" keyProperty="saleNo">
         INSERT INTO SALES_INFO (BUYER_NAME, buyer_phone, COLOR, SALE_DATE, MODEL_NO)
         VALUES (#{buyerName}, #{buyerPhone}, #{color}, NOW(), #{modelNo})
     </insert>
