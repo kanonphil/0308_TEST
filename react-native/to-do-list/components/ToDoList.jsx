@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 'auto'
   },
   title: {
-    fontSize: 30,
+    fontSize: 35,
     fontWeight: '700',
     marginVertical: 12,
   },

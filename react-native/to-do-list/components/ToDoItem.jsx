@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 12,
     paddingVertical: 8,
-    minHeight: 50,
+    minHeight: 40,
     backgroundColor: '#eeeeee',
     gap: 10,
     flexShrink: 0
