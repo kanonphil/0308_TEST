@@ -2,10 +2,11 @@ import { Alert, FlatList, StyleSheet, Text, View } from 'react-native'
 import { useState } from 'react'
 import ToDoInput from './ToDoInput'
 import ToDoItem from './ToDoItem'
+import { dummy_data } from '../data/dummy'
 
 const ToDoList = () => {
   const [inputText, setInputText] = useState('')
-  const [toDoList, setToDoList] = useState([])
+  const [toDoList, setToDoList] = useState(dummy_data)
   const [editId, setEditId] = useState(null)
   const [editText, setEditText] = useState('')
 
@@ -33,7 +34,7 @@ const ToDoList = () => {
       [
         {
           text: 'OK',
-          onPress: () => console.log(`Add: id: ${newData.id}, text: ${inputText}`),
+          onPress: () => console.log(`Add: ${JSON.stringify(newData)}`),
           style: 'destructive'
         }
       ]
