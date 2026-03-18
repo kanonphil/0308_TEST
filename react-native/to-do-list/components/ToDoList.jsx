@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { Alert, FlatList, StyleSheet, Text, View } from 'react-native'
 import { useState } from 'react'
 import ToDoInput from './ToDoInput'
 import ToDoItem from './ToDoItem'
@@ -26,6 +26,18 @@ const ToDoList = () => {
       id: toDoList.length > 0 ? Math.max(...idList) + 1 : 1,
       text: inputText
     }
+
+    Alert.alert(
+      '장바구니 추가',
+      `Add: ${inputText}`,
+      [
+        {
+          text: 'OK',
+          onPress: () => console.log(`Add: id: ${newData.id}, text: ${inputText}`),
+          style: 'destructive'
+        }
+      ]
+    )
     
     setToDoList([
       ...toDoList, 
@@ -35,7 +47,22 @@ const ToDoList = () => {
   }
 
   const handleDelete = (id) => {
-    setToDoList(toDoList.filter((item) => item.id !== id))
+    Alert.alert(
+      "삭제 확인",
+      "정말로 삭제 하시겠습니까?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log('Undelete'),
+          style: 'cancel'
+        },
+        {
+          text: 'Confirm',
+          onPress: () => setToDoList(toDoList.filter((item) => item.id !== id)),
+          style: 'destructive'
+        }
+      ]
+    )
   }
 
   const handleEditStart = (item) => {
